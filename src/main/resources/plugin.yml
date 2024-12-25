@@ -1,0 +1,13 @@
+name: LoupGarous
+version: '1.0.0-1.21'
+main: fr.line.loupGarous.LoupGarous
+api-version: '1.21'
+commands:
+  test:
+    description: "Test !"
+  testb:
+    description: "Testb !"
+  lg:
+    description: "Commande principale d'interface du menu de création de partie !"
+  game:
+    description: "Permet de voir les parties en attente de joueurs !"
