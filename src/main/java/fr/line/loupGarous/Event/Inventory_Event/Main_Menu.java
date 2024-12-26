@@ -1,13 +1,29 @@
 package fr.line.loupGarous.Event.Inventory_Event;
 
 import fr.line.loupGarous.Command.cmd_lg;
+import fr.line.loupGarous.Command.cmd_paste;
 import fr.line.loupGarous.LoupGarous;
 import fr.line.loupGarous.Utils.Nb_Role_Game;
 import fr.line.loupGarous.Utils.Take_Id;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class Main_Menu {
+
+    public static Integer x_Position = 99;
+    public static Integer z_Position = 99;
+
+    public static Integer Find_Y_Position(Integer x, Integer z)
+    {
+        Integer y = 200;
+
+        while (LoupGarous.plugin.getServer().getWorld("LoupGarou_Games").getBlockAt(x, y, z).getType() == Material.AIR)
+            y--;
+        return y + 1;
+    }
 
     private static void Start_Game(Player player, Integer id)
     {
@@ -15,6 +31,9 @@ public class Main_Menu {
         LoupGarous.Game_List.get(id).setState(1);
         LoupGarous.List_Lobby.add(player.getName());
         player.closeInventory();
+        cmd_paste.Create_Map("lg_1", x_Position, z_Position);
+        player.teleport(new Location(LoupGarous.plugin.getServer().getWorld("LoupGarou_Games"), LoupGarous.Game_List.get(id).getX(),
+                Find_Y_Position((int) (LoupGarous.Game_List.get(id).getX() + 1), (int) (LoupGarous.Game_List.get(id).getZ() + 1)), LoupGarous.Game_List.get(id).getZ()));
     }
 
     private static void Left_Arrow(Integer id, Player player)
@@ -62,6 +81,25 @@ public class Main_Menu {
         player.openInventory(cmd_lg.Create_Inventory(player));
     }
 
+    private static void Delete_Game(Integer id, Player player)
+    {
+        Player joueur;
+        Integer i = 0;
+        Integer j = 0;
+
+        while (!LoupGarous.List_Lobby.get(i).equalsIgnoreCase(player.getName()))
+            i++;
+        LoupGarous.List_Lobby.remove((int)i);
+        while (j < LoupGarous.Game_List.get(id).getJoueurs().size())
+        {
+            joueur = (Player) Bukkit.getOfflinePlayer(LoupGarous.Game_List.get(id).getJoueurs().get(j));
+            joueur.teleport(new Location(LoupGarous.plugin.getServer().getWorld("World"), 0, 100, 0));
+            joueur.sendMessage("§cLa partie viens d'être supprimé !");
+            j++;
+        }
+        LoupGarous.Game_List.remove((int)id);
+    }
+
     public static void Main_Menu(InventoryClickEvent event)
     {
         Player player = (Player) event.getWhoClicked();
@@ -72,6 +110,9 @@ public class Main_Menu {
         {
             case 53:
                 Start_Game(player, id);
+                return;
+            case 45:
+                Delete_Game(id, player);
                 return;
             case 12:
                 Left_Arrow(id, player);

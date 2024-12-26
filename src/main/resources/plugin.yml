@@ -3,6 +3,14 @@ version: '1.0.0-1.21'
 main: fr.line.loupGarous.LoupGarous
 api-version: '1.21'
 commands:
+
+  position:
+    description: "Permet d'indiquer une position !"
+  copy:
+    description: "Permet de copier l'intégralité de ce qu'il ce trouve dans la selection !"
+  paste:
+    description: "Permet de coller le schematic donné !"
+
   test:
     description: "Test !"
   testb:

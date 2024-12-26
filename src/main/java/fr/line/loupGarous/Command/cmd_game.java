@@ -28,6 +28,11 @@ public class cmd_game implements CommandExecutor
         {
             Player player = (Player) sender;
 
+            if (player.getWorld().getName().equalsIgnoreCase("LoupGarou_Games"))
+            {
+                player.sendMessage("§c§lErreur §cVous êtes déjà dans une partie !");
+                return false;
+            }
             player.openInventory(Create_Inventory_1(player));
             LoupGarous.Player_Page.put(player.getName(), 0);
         }

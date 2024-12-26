@@ -11,7 +11,7 @@ public class Take_Id
 
         while (i < LoupGarous.Game_List.size() && LoupGarous.Game_List.get(i).getHost() != player_name)
             i++;
-        return 0;
+        return i;
     }
 
 }

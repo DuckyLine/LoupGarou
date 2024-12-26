@@ -5,10 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class cmd_test implements CommandExecutor
 {
     @Override
@@ -22,6 +18,7 @@ public class cmd_test implements CommandExecutor
                 System.out.println("Partie: " + i);
                 System.out.println("Host de la partie = " + LoupGarous.Game_List.get(i).getHost());
                 System.out.println("Liste des joueurs = " + LoupGarous.Game_List.get(i).getJoueurs());
+                System.out.println("X = " + LoupGarous.Game_List.get(i).getX() + " Z = " + LoupGarous.Game_List.get(i).getZ());
                 System.out.println("State de la partie = " + LoupGarous.Game_List.get(i).getState());
                 System.out.println("Nombre maximum de joueurs = " + LoupGarous.Game_List.get(i).getNb_Player());
                 System.out.println("Villageois=" + LoupGarous.Game_List.get(i).getRole("Villageois" ) + "/Voyante="

@@ -1,5 +1,7 @@
 package fr.line.loupGarous.Utils.Struct;
 
+import fr.line.loupGarous.Event.Inventory_Event.Main_Menu;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +13,17 @@ public class Main_Struct
     private List<String> Joueurs;
     private Role_Main_Struct Role;
     private Integer Nb_Player;
+    private Float x;
+    private Float z;
 
-    public Main_Struct(String Player_Name)
+    public Main_Struct(String Player_Name, Float x, Float z)
     {
         this.Host = Player_Name;
         this.State = 0;
         this.Role = new Role_Main_Struct();
         this.Nb_Player = 1;
+        this.x = x;
+        this.z = z;
 
         this.Joueurs = new ArrayList<>();
         this.Joueurs.add(Player_Name);
@@ -27,7 +33,14 @@ public class Main_Struct
     {
         return Host;
     }
-
+    public Float getX()
+    {
+        return x;
+    }
+    public Float getZ()
+    {
+        return z;
+    }
     public Integer getState()
     {
         return State;
